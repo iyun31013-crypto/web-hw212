@@ -1,4 +1,5 @@
 // ===== Part A =====
+
 let sumA = 0;
 
 for (let i = 0; i < ratings.length; i++) {
@@ -6,6 +7,8 @@ for (let i = 0; i < ratings.length; i++) {
 }
 
 console.log("A1 평균 평점: " + sumA / ratings.length);
+
+
 
 let maxA = 0;
 
@@ -22,6 +25,7 @@ console.log(
 );
 
 
+// A3. 8점 이상인 영화 수
 let countA = 0;
 
 for (let i = 0; i < movies.length; i++) {
@@ -33,6 +37,7 @@ for (let i = 0; i < movies.length; i++) {
 console.log("A3 8점 이상: " + countA + "편");
 
 
+// A4. 연도대별 영화 수
 let count2020 = 0;
 let count2010 = 0;
 let count2000 = 0;
@@ -67,6 +72,7 @@ console.log(
 );
 
 
+// A5. 관객 100만 이상 영화 제목
 let bigA = "";
 
 for (let i = 0; i < audiences.length; i++) {
@@ -86,7 +92,10 @@ if (bigA === "") {
 console.log("A5 관객 100만 이상: " + bigA);
 
 
+
+
 // ===== Part B =====
+// 배열을 영화 객체로 합치기
 for (let i = 0; i < titles.length; i++) {
     movies.push({
         title: titles[i],
@@ -97,6 +106,7 @@ for (let i = 0; i < titles.length; i++) {
 }
 
 
+// 1. 평균 평점
 function average(list) {
     let sum = 0;
 
@@ -108,6 +118,7 @@ function average(list) {
 }
 
 
+// 2. 최고 평점 영화
 function best(list) {
     let result = list[0];
 
@@ -121,11 +132,13 @@ function best(list) {
 }
 
 
+// 3. 평점 필터
 function filterByRating(list, min) {
     return list.filter(m => m.rating >= min);
 }
 
 
+// 4. 정렬
 function sortBy(list, key, desc) {
     const result = [...list];
 
@@ -147,6 +160,7 @@ function sortBy(list, key, desc) {
 }
 
 
+// 5. 영화 제목 검색
 function search(list, keyword) {
     const word = keyword.trim().toLowerCase();
 
@@ -156,11 +170,13 @@ function search(list, keyword) {
 }
 
 
+// 6. 숫자에 천 단위 쉼표 넣기
 function formatNumber(n) {
     return Number(n).toLocaleString("ko-KR");
 }
 
 
+// 7. 개봉한 지 몇 년인지 계산
 function yearsSince(dateStr) {
     const date = new Date(dateStr);
     const today = new Date();
@@ -197,10 +213,12 @@ const line3 = "관객 1위: " + topAudience.title +
 
 
 // ===== Part C =====
+// 영화 목록 가져오기
 function getList(data) {
     return data.results;
 }
 
+// 평균 평점 계산하기
 function averageBy(list, key) {
     let sum = 0;
 
@@ -212,6 +230,7 @@ function averageBy(list, key) {
 }
 
 
+// C1. 영화 데이터 확인
 console.log(
     "C1",
     "page " + TMDB.page + ",",
@@ -220,15 +239,18 @@ console.log(
     "이번 응답 " + getList(TMDB).length + "편"
 );
 
+// C2. 상영작 평균 평점
 console.log(
     "C2 상영작 평균 평점: " +
     averageBy(getList(TMDB), "vote_average").toFixed(1)
 );
 
+// C4. 검색 결과 개수
 console.log(
     "C4 'The Furious' 검색: " + search(getList(TMDB), "The Furious").length + "편"
 );
 
+// C3. 평점 상위 5편
 console.table(
     sortBy(getList(TMDB), "vote_average", true).slice(0, 5),
     ["title", "release_date", "vote_average"]
